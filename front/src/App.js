@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react"
+import Monster from "./components/Monster"
 import monsterService from "./services/monsters"
-import axios from "axios"
 
 const App = () => {
-  const [monsters, setMonsters] = useState([])
-  const [apiUrl, setapiUrl] = useState([])
-  const [unique, setUnique] = useState([])
+  const [monsters, setMonsters] = useState([]) //objects of all the monsters
+  const [unique, setUnique] = useState([]) //used to detect duplicate monster names
   const baseUrl = "https://api.osrsbox.com/monsters"
 
   useEffect(() => {
@@ -29,11 +28,9 @@ const App = () => {
 
   return (
     <div>
-      <ul>
-        {monsters.map((monster) => (
-          <li key={monster._id}>{monster.name}</li>
-        ))}
-      </ul>
+      {monsters.map((monster) => (
+        <Monster monster={monster} />
+      ))}
     </div>
   )
 }

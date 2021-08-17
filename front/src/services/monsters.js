@@ -12,7 +12,6 @@ const fetchData = (url, prevResponse = []) => {
     .get(url)
     .then((res) => res.data)
     .then((newResponse) => {
-      console.log(newResponse)
       const response = [...prevResponse, ...newResponse._items]
       if (newResponse._links.next !== undefined) {
         let nextUrl = `https://api.osrsbox.com/${newResponse._links.next.href}`
