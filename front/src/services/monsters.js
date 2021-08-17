@@ -7,6 +7,7 @@ const getAll = () => {
   return req.then((res) => res.data)
 }
 
+//paginated api
 const fetchData = (url, prevResponse = []) => {
   return axios
     .get(url)
