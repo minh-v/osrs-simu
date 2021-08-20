@@ -16,6 +16,7 @@ const Monster = ({ monster }) => {
             </p>
             <img
               src={`https://chisel.weirdgloop.org/static/img/osrs-sprite/${drop.id}.png`}
+              alt="drop pic"
             />
           </div>
         ))}

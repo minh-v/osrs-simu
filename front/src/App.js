@@ -1,10 +1,77 @@
 import React, { useState, useEffect } from "react"
 import Monster from "./components/Monster"
+import List from "./components/List"
 import monsterService from "./services/monsters"
 
 const App = () => {
   const [monsters, setMonsters] = useState([]) //objects of all the monsters
   const [unique, setUnique] = useState([]) //used to detect duplicate monster names
+  const [selected, setSelected] = useState({
+    _id: "610b62f06d4abbe9cf68e011",
+    id: "1",
+    name: "Molanisk",
+    last_updated: "2021-08-05",
+    incomplete: true,
+    members: true,
+    release_date: "2007-03-20",
+    combat_level: 51,
+    size: 1,
+    hitpoints: 52,
+    max_hit: 5,
+    attack_type: ["melee"],
+    attack_speed: 4,
+    aggressive: true,
+    poisonous: false,
+    venomous: false,
+    immune_poison: false,
+    immune_venom: false,
+    attributes: [],
+    category: ["molanisks"],
+    slayer_monster: true,
+    slayer_level: 39,
+    slayer_xp: 52,
+    slayer_masters: ["vannaka", "chaeldar"],
+    duplicate: false,
+    examine: "A strange mole-like being.",
+    wiki_name: "Molanisk",
+    wiki_url: "https://oldschool.runescape.wiki/w/Molanisk",
+    attack_level: 40,
+    strength_level: 40,
+    defence_level: 50,
+    magic_level: 0,
+    ranged_level: 1,
+    attack_bonus: 0,
+    strength_bonus: 0,
+    attack_magic: 0,
+    magic_bonus: 0,
+    attack_ranged: 0,
+    ranged_bonus: 0,
+    defence_stab: 45,
+    defence_slash: 45,
+    defence_crush: 35,
+    defence_magic: 30,
+    defence_ranged: 55,
+    drops: [
+      {
+        id: 526,
+        name: "Bones",
+        members: false,
+        quantity: "1",
+        noted: false,
+        rarity: 1,
+        rolls: 1,
+      },
+    ],
+    _created: "Thu, 01 Jan 1970 00:00:00 GMT",
+    _updated: "Thu, 01 Jan 1970 00:00:00 GMT",
+    _etag: "dbe87c4855ee8ef7e44df83e13232af81de4b508",
+    _links: {
+      self: {
+        title: "Monster",
+        href: "monsters/610b62f06d4abbe9cf68e011",
+      },
+    },
+  }) //selected monster
   const baseUrl = "https://api.osrsbox.com/monsters"
 
   useEffect(() => {
@@ -20,17 +87,17 @@ const App = () => {
       })
       setMonsters(monsters.concat(uniqueMonsters))
       setUnique(unique.concat(Array.from(seen)))
+      console.log(monsters)
+      setSelected(uniqueMonsters[0])
+      //console.log(selected)
     })
   }, [])
-
-  console.log(monsters)
-  //console.log(unique)
+  //console.log(selected)
 
   return (
     <div>
-      {monsters.map((monster) => (
-        <Monster monster={monster} />
-      ))}
+      <List monsters={monsters} selected={selected} setSelected={setSelected} />
+      {selected && <Monster monster={selected} />}
     </div>
   )
 }
