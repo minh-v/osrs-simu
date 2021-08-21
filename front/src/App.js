@@ -260,7 +260,7 @@ const App = () => {
         href: "monsters/610b62f06d4abbe9cf68e011",
       },
     },
-  }) //selected monster
+  }) //selected monster, initially first monster (molanisk)
   const baseUrl = "https://api.osrsbox.com/monsters"
 
   useEffect(() => {

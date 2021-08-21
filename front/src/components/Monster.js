@@ -2,7 +2,7 @@ import React from "react"
 
 const Monster = ({ monster }) => {
   const imgSrc = `https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`
-  //
+  // monster image
   return (
     <div>
       <h1>{monster.name}</h1>
