@@ -10,19 +10,6 @@ const Monster = ({ monster }) => {
       <img className="monsterImage" src={imgSrc} alt="monster pic" />
       <h2>Lootage</h2>
       <Loot drops={monster.drops} />
-      <div>
-        {monster.drops.map((drop) => (
-          <div>
-            <p>
-              {drop.name} {drop.rarity}
-            </p>
-            <img
-              src={`https://chisel.weirdgloop.org/static/img/osrs-sprite/${drop.id}.png`}
-              alt="drop pic"
-            />
-          </div>
-        ))}
-      </div>
     </div>
   )
 }
