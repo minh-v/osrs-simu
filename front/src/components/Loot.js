@@ -8,33 +8,35 @@ src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAACQAAAAgCAYAAAB6kdqOAAACGUlE
 alt="bones"
 />*/
 
-//abberant spectre elite rarity is 1 from api...
+//abberant spectre elite rarity is 1 from api..
+//deal with rarity 1 that's not the FIRST item in the drop array abberant, kree
 
 const Loot = ({ drops }) => {
   const [loot, setLoot] = useState([])
   let existedLoot
   let newLoot = loot //do not mutate state directly
+
   //on click generate loot
 
-  const rollQuantity = (monsterQuantity, drop) => {
+  const rollQuantity = (monsterQuantity, currQuantity) => {
     const lowHigh = monsterQuantity.split("-")
     if (lowHigh.length === 1) {
       return monsterQuantity //convert to int?
     } else {
       const min = parseInt(lowHigh[0])
       const max = parseInt(lowHigh[1])
+
       //random int between low and high
-      //console.log(Math.floor(Math.random() * (max - min + 1) + min))
-      //const finalQuant = parseInt(drop.quantity)
       return (
-        parseInt(drop.quantity) +
+        parseInt(currQuantity.quantity) +
         Math.floor(Math.random() * (max - min + 1) + min)
       )
     }
   }
 
   const handleClick = (drops) => {
-    //too slow with full bject? just make it contain id and quantity
+    let updatedQuantity
+    //too slow with full object? just make it contain id and quantity
     setLoot((prevLoot) => {
       for (let i = 0; i <= drops.length; i++) {
         const random = Math.random() //rarity roll for each item
@@ -49,9 +51,14 @@ const Loot = ({ drops }) => {
 
           if (existedLoot) {
             //roll the quantity here
-            const updatedQuantity =
-              parseInt(rollQuantity(drops[i].quantity, existedLoot)) +
-              parseInt(existedLoot.quantity)
+            if (drops[i].quantity.includes("-")) {
+              updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
+            } else {
+              updatedQuantity =
+                parseInt(rollQuantity(drops[i].quantity, existedLoot)) +
+                parseInt(existedLoot.quantity)
+            }
+            console.log("updated quantity", typeof updatedQuantity)
             //console.log("prevLoot quantity: ", prevLoot) //sometimes it doesnt update?????????
             const updatedLoot = {
               ...existedLoot,
@@ -59,30 +66,29 @@ const Loot = ({ drops }) => {
             }
 
             //replace updated loot
-            newLoot = prevLoot.map((loo) =>
+            newLoot = newLoot.map((loo) =>
               loo.id !== drops[i].id ? loo : updatedLoot
             )
           } else {
+            // first time
             //roll quantity
             const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
             const updatedLoot = {
               ...drops[i],
               quantity: updatedQuantity.toString(),
             } //update new quantity for loot
-            newLoot = [...prevLoot, updatedLoot]
+            newLoot = [...newLoot, updatedLoot]
           }
         } else if (random <= drops[i].rarity) {
           existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
           //handle rolls
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           if (existedLoot) {
-            console.log("updating")
             const updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
             const updatedLoot = {
               ...existedLoot,
               quantity: updatedQuantity.toString(),
             }
-            //console.log("updated", updatedLoot)
 
             //replace updated loot
             newLoot = newLoot.map((loo) =>
@@ -96,7 +102,8 @@ const Loot = ({ drops }) => {
               ...drops[i],
               quantity: updatedQuantity.toString(),
             } //update new quantity for loot
-            newLoot.push(updatedLoot)
+            //newLoot.push(updatedLoot)
+            newLoot = [...newLoot, updatedLoot]
             return newLoot
           }
         }
