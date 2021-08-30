@@ -42,7 +42,7 @@ const Loot = ({ drops }) => {
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           //make it drop all the following loops?
           // if (drops[i].name.includes("Reward casket")) {
-          //   console.log("hit")
+          //  console.log("hit")
           //   continue
           // }
           existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
@@ -52,7 +52,7 @@ const Loot = ({ drops }) => {
             const updatedQuantity =
               parseInt(rollQuantity(drops[i].quantity, existedLoot)) +
               parseInt(existedLoot.quantity)
-            console.log("updatedQuantity: ", updatedQuantity) //sometimes it doesnt update?????????
+            //console.log("prevLoot quantity: ", prevLoot) //sometimes it doesnt update?????????
             const updatedLoot = {
               ...existedLoot,
               quantity: updatedQuantity.toString(),
@@ -76,6 +76,7 @@ const Loot = ({ drops }) => {
           //handle rolls
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           if (existedLoot) {
+            console.log("updating")
             const updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
             const updatedLoot = {
               ...existedLoot,
@@ -84,7 +85,7 @@ const Loot = ({ drops }) => {
             //console.log("updated", updatedLoot)
 
             //replace updated loot
-            newLoot = prevLoot.map((loo) =>
+            newLoot = newLoot.map((loo) =>
               loo.id !== drops[i].id ? loo : updatedLoot
             )
             return newLoot
@@ -105,7 +106,7 @@ const Loot = ({ drops }) => {
           return newLoot
         }
       }
-      console.log("?", newLoot)
+      console.log("never reaches here", newLoot)
       return newLoot
     })
   }
@@ -133,3 +134,53 @@ const Loot = ({ drops }) => {
 }
 
 export default Loot
+
+/*
+const handleClick = (drops) => {
+    //console.log("generate lootage")
+    //too slow with full bject? just make it contain id and quantity
+    drops.every((drop) => {
+      console.log(drop.name, drop.rarity)
+      //console.log(drop.name, drop.rarity)
+      const random = Math.random() //roll for each item
+      if (random <= drop.rarity) {
+        console.log(true)
+      }
+      console.log(random)
+      if (drop.rarity === 1) {
+        setLoot(loot.concat(drop))
+        //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
+        //make it drop all the following loops?
+        existedLoot = loot.find((l) => l.id === drop.id) //check if already exists
+        if (existedLoot) {
+          //roll the quantity here
+          const updatedQuantity =
+            parseInt(existedLoot.quantity) + parseInt(drop.quantity)
+          const updatedLoot = {
+            ...existedLoot,
+            quantity: updatedQuantity.toString(),
+          }
+          // const updatedLootage = { id: loot.id, quantity: updatedQuantity } //just id and quantity?
+          console.log("updated", updatedLoot)
+
+          //replace updated lootage
+          //doesnt update currently
+          setLoot(loot.map((loo) => (loo.id !== drop.id ? loo : updatedLoot)))
+          // setLoot((oldLoot) => [...oldLoot, drop])
+        } else {
+          console.log("first entry", drop)
+          //roll quantity
+          setLoot((loot) => [...loot, drop])
+        }
+
+        return true //continue loop
+      } else if (random <= drop.rarity) {
+        //handle quantity handle rolls
+        //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
+        setLoot(loot.concat(drop))
+        return false //break out of loop
+      }
+      return true
+    })
+  }
+  */
