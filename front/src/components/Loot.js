@@ -17,7 +17,7 @@ const Loot = ({ drops }) => {
   const handleClick = (drops) => {
     //too slow with full bject? just make it contain id and quantity
     setLoot((prevLoot) => {
-      for (let i = 0; i < drops.length; i++) {
+      for (let i = 0; i <= drops.length; i++) {
         //console.log("drop", drops[i])
         const random = Math.random() //rarity roll for each item
         if (drops[i].rarity === 1) {
@@ -50,12 +50,15 @@ const Loot = ({ drops }) => {
           //handle quantity handle rolls
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           newLoot.push(drops[i])
-          console.log("newLoot: ", newLoot)
+          return newLoot
+        }
+        //if it reaches the end of the drop table
+        if (i === drops.length - 1) {
           return newLoot
         }
       }
       console.log("newLoot", newLoot)
-      //LOOP ENDS HERE THO
+      return newLoot
     })
   }
   /*
