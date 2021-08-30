@@ -17,16 +17,17 @@ const Loot = ({ drops }) => {
   const handleClick = (drops) => {
     //too slow with full bject? just make it contain id and quantity
     setLoot((prevLoot) => {
-      drops.every((drop) => {
+      for (let i = 0; i < drops.length; i++) {
+        //console.log("drop", drops[i])
         const random = Math.random() //rarity roll for each item
-        if (drop.rarity === 1) {
+        if (drops[i].rarity === 1) {
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           //make it drop all the following loops?
-          existedLoot = prevLoot.find((l) => l.id === drop.id) //check if already exists
+          existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
           if (existedLoot) {
             //roll the quantity here
             const updatedQuantity =
-              parseInt(existedLoot.quantity) + parseInt(drop.quantity)
+              parseInt(existedLoot.quantity) + parseInt(drops[i].quantity)
             const updatedLoot = {
               ...existedLoot,
               quantity: updatedQuantity.toString(),
@@ -35,27 +36,26 @@ const Loot = ({ drops }) => {
 
             //replace updated loot
             newLoot = prevLoot.map((loo) =>
-              loo.id !== drop.id ? loo : updatedLoot
+              loo.id !== drops[i].id ? loo : updatedLoot
             )
             // setLoot((oldLoot) => [...oldLoot, drop])
           } else {
             //roll quantity
-            newLoot = [...prevLoot, drop]
+            newLoot = [...prevLoot, drops[i]]
             //console.log("first entry", newLoot)
           }
-        } else if (random <= drop.rarity) {
-          console.log("entered drop table", drop)
+        } else if (random <= drops[i].rarity) {
+          console.log("entered drop table", drops[i])
           console.log("random number: ", random)
           //handle quantity handle rolls
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
-          newLoot.push(drop)
+          newLoot.push(drops[i])
           console.log("newLoot: ", newLoot)
           return newLoot
         }
-      })
+      }
       console.log("newLoot", newLoot)
       //LOOP ENDS HERE THO
-      return newLoot
     })
   }
   /*
@@ -96,9 +96,9 @@ const Loot = ({ drops }) => {
   }
   */
 
-  useEffect(() => {
-    console.log("loot", loot)
-  }, [loot])
+  // useEffect(() => {
+  //   console.log("loot", loot)
+  // }, [loot])
 
   return (
     <div>
