@@ -9,7 +9,7 @@ const Monster = ({ monster }) => {
       <h1>{monster.name}</h1>
       <img className="monsterImage" src={imgSrc} alt="monster pic" />
       <h2>Lootage</h2>
-      <Loot drops={monster.drops} />
+      <Loot key={monster.id} drops={monster.drops} />
     </div>
   )
 }

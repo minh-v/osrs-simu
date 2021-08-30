@@ -8,7 +8,7 @@ src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAACQAAAAgCAYAAAB6kdqOAAACGUlE
 alt="bones"
 />*/
 
-//make a roll quantity function?
+//abberant spectre elite rarity is 1 from api...
 
 const Loot = ({ drops }) => {
   const [loot, setLoot] = useState([])
@@ -16,17 +16,20 @@ const Loot = ({ drops }) => {
   let newLoot = loot //do not mutate state directly
   //on click generate loot
 
-  const rollQuantity = (monsterQuantity) => {
+  const rollQuantity = (monsterQuantity, drop) => {
     const lowHigh = monsterQuantity.split("-")
-    console.log("lowHigh: ", lowHigh)
     if (lowHigh.length === 1) {
       return monsterQuantity //convert to int?
     } else {
       const min = parseInt(lowHigh[0])
       const max = parseInt(lowHigh[1])
       //random int between low and high
-      console.log(Math.floor(Math.random() * (max - min + 1) + min))
-      return Math.floor(Math.random() * (max - min + 1) + min).toString()
+      //console.log(Math.floor(Math.random() * (max - min + 1) + min))
+      //const finalQuant = parseInt(drop.quantity)
+      return (
+        parseInt(drop.quantity) +
+        Math.floor(Math.random() * (max - min + 1) + min)
+      )
     }
   }
 
@@ -38,17 +41,22 @@ const Loot = ({ drops }) => {
         if (drops[i].rarity === 1) {
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           //make it drop all the following loops?
+          // if (drops[i].name.includes("Reward casket")) {
+          //   console.log("hit")
+          //   continue
+          // }
           existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
+
           if (existedLoot) {
             //roll the quantity here
             const updatedQuantity =
-              parseInt(existedLoot.quantity) +
-              parseInt(rollQuantity(drops[i].quantity))
+              parseInt(rollQuantity(drops[i].quantity, existedLoot)) +
+              parseInt(existedLoot.quantity)
+            console.log("updatedQuantity: ", updatedQuantity) //sometimes it doesnt update?????????
             const updatedLoot = {
               ...existedLoot,
               quantity: updatedQuantity.toString(),
             }
-            //console.log("updated", updatedLoot)
 
             //replace updated loot
             newLoot = prevLoot.map((loo) =>
@@ -56,7 +64,7 @@ const Loot = ({ drops }) => {
             )
           } else {
             //roll quantity
-            const updatedQuantity = rollQuantity(drops[i].quantity)
+            const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
             const updatedLoot = {
               ...drops[i],
               quantity: updatedQuantity.toString(),
@@ -68,9 +76,7 @@ const Loot = ({ drops }) => {
           //handle rolls
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           if (existedLoot) {
-            const updatedQuantity =
-              parseInt(existedLoot.quantity) +
-              parseInt(rollQuantity(drops[i].quantity))
+            const updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
             const updatedLoot = {
               ...existedLoot,
               quantity: updatedQuantity.toString(),
@@ -84,7 +90,7 @@ const Loot = ({ drops }) => {
             return newLoot
           } else {
             //first time drop appears in loot array
-            const updatedQuantity = rollQuantity(drops[i].quantity)
+            const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
             const updatedLoot = {
               ...drops[i],
               quantity: updatedQuantity.toString(),
@@ -95,7 +101,7 @@ const Loot = ({ drops }) => {
         }
         //if it reaches the end of the drop table and hasnt rolled a drop
         if (i === drops.length - 1) {
-          //console.log("no drops");
+          console.log("no drops")
           return newLoot
         }
       }
@@ -107,7 +113,7 @@ const Loot = ({ drops }) => {
   return (
     <div>
       <Button color="primary" onClick={() => handleClick(drops)}>
-        generate lootage
+        generate loot
       </Button>
       <div>
         {loot.map((drop) => (
