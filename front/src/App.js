@@ -261,7 +261,7 @@ const App = () => {
       },
     },
   }) //selected monster, initially first monster (molanisk)
-  const baseUrl = "https://api.osrsbox.com/monsters"
+  const baseUrl = "https://api.osrsbox.com/monsters" //pls cache the monster/item api for the love of god
 
   useEffect(() => {
     monsterService.fetchData(baseUrl).then((initialMonsters) => {
@@ -278,10 +278,8 @@ const App = () => {
       setUnique(unique.concat(Array.from(seen)))
       console.log(monsters)
       setSelected(uniqueMonsters[0])
-      //console.log(selected)
     })
   }, [])
-  //console.log(selected)
 
   return (
     <div>
