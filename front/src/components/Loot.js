@@ -11,11 +11,55 @@ alt="bones"
 const Loot = ({ drops }) => {
   const [loot, setLoot] = useState([])
   let existedLoot
+  let newLoot = loot //do not mutate state directly
   //on click generate loot
+
   const handleClick = (drops) => {
     //too slow with full bject? just make it contain id and quantity
+    setLoot((prevLoot) => {
+      drops.every((drop) => {
+        const random = Math.random() //rarity roll for each item
+        if (drop.rarity === 1) {
+          //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
+          //make it drop all the following loops?
+          existedLoot = prevLoot.find((l) => l.id === drop.id) //check if already exists
+          if (existedLoot) {
+            //roll the quantity here
+            const updatedQuantity =
+              parseInt(existedLoot.quantity) + parseInt(drop.quantity)
+            const updatedLoot = {
+              ...existedLoot,
+              quantity: updatedQuantity.toString(),
+            }
+            console.log("updated", updatedLoot)
+
+            //replace updated loot
+            newLoot = prevLoot.map((loo) =>
+              loo.id !== drop.id ? loo : updatedLoot
+            )
+            // setLoot((oldLoot) => [...oldLoot, drop])
+          } else {
+            //roll quantity
+            newLoot = [...prevLoot, drop]
+            //console.log("first entry", newLoot)
+          }
+        } else if (random <= drop.rarity) {
+          console.log("entered drop table", drop)
+          console.log("random number: ", random)
+          //handle quantity handle rolls
+          //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
+          newLoot.push(drop)
+          console.log("newLoot: ", newLoot)
+          return newLoot
+        }
+      })
+      console.log("newLoot", newLoot)
+      //LOOP ENDS HERE THO
+      return newLoot
+    })
+  }
+  /*
     drops.every((drop) => {
-      //console.log(drop.name, drop.rarity)
       const random = Math.random() //roll for each item
       if (drop.rarity === 1) {
         //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
@@ -29,11 +73,9 @@ const Loot = ({ drops }) => {
             ...existedLoot,
             quantity: updatedQuantity.toString(),
           }
-          // const updatedLootage = { id: loot.id, quantity: updatedQuantity } //just id and quantity?
           console.log("updated", updatedLoot)
 
-          //replace updated lootage
-          //doesnt update currently
+          //replace updated loot
           setLoot(loot.map((loo) => (loo.id !== drop.id ? loo : updatedLoot)))
           // setLoot((oldLoot) => [...oldLoot, drop])
         } else {
@@ -52,6 +94,7 @@ const Loot = ({ drops }) => {
       return true
     })
   }
+  */
 
   useEffect(() => {
     console.log("loot", loot)
