@@ -13,11 +13,12 @@ alt="bones"
 
 const Loot = ({ drops }) => {
   const [loot, setLoot] = useState([])
+  const [counter, setCounter] = useState(0)
   let existedLoot
   let newLoot = loot //do not mutate state directly
 
   //on click generate loot
-
+  //test this function
   const rollQuantity = (monsterQuantity, currQuantity) => {
     const lowHigh = monsterQuantity.split("-")
     if (lowHigh.length === 1) {
@@ -36,6 +37,7 @@ const Loot = ({ drops }) => {
 
   const handleClick = (drops) => {
     let updatedQuantity
+    setCounter(counter + 1)
     //too slow with full object? just make it contain id and quantity
     setLoot((prevLoot) => {
       for (let i = 0; i <= drops.length; i++) {
@@ -43,14 +45,16 @@ const Loot = ({ drops }) => {
         if (drops[i].rarity === 1) {
           //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
           //make it drop all the following loops?
-          // if (drops[i].name.includes("Reward casket")) {
-          //  console.log("hit")
-          //   continue
-          // }
+          //skip reward casket
+          if (drops[i].name.includes("Reward casket")) {
+            console.log("hit")
+            continue
+          }
           existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
 
           if (existedLoot) {
             //roll the quantity here
+            //cover the case if the rarity === 1 loot is singular or a range
             if (drops[i].quantity.includes("-")) {
               updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
             } else {
@@ -58,11 +62,9 @@ const Loot = ({ drops }) => {
                 parseInt(rollQuantity(drops[i].quantity, existedLoot)) +
                 parseInt(existedLoot.quantity)
             }
-            console.log("updated quantity", typeof updatedQuantity)
-            //console.log("prevLoot quantity: ", prevLoot) //sometimes it doesnt update?????????
             const updatedLoot = {
               ...existedLoot,
-              quantity: updatedQuantity.toString(),
+              quantity: updatedQuantity,
             }
 
             //replace updated loot
@@ -75,7 +77,7 @@ const Loot = ({ drops }) => {
             const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
             const updatedLoot = {
               ...drops[i],
-              quantity: updatedQuantity.toString(),
+              quantity: updatedQuantity,
             } //update new quantity for loot
             newLoot = [...newLoot, updatedLoot]
           }
@@ -87,7 +89,7 @@ const Loot = ({ drops }) => {
             const updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
             const updatedLoot = {
               ...existedLoot,
-              quantity: updatedQuantity.toString(),
+              quantity: updatedQuantity,
             }
 
             //replace updated loot
@@ -100,7 +102,7 @@ const Loot = ({ drops }) => {
             const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
             const updatedLoot = {
               ...drops[i],
-              quantity: updatedQuantity.toString(),
+              quantity: updatedQuantity,
             } //update new quantity for loot
             //newLoot.push(updatedLoot)
             newLoot = [...newLoot, updatedLoot]
@@ -120,6 +122,7 @@ const Loot = ({ drops }) => {
 
   return (
     <div>
+      <p>Killed {counter} times</p>
       <Button color="primary" onClick={() => handleClick(drops)}>
         generate loot
       </Button>
