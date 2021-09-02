@@ -1,6 +1,8 @@
 //button + generate loot
 import React, { useState } from "react"
 import Button from "@material-ui/core/Button"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import Switch from "@material-ui/core/Switch"
 
 //can get image icon from api instead of link eventually
 /*<img
@@ -19,7 +21,8 @@ alt="bones"
 
 const Loot = ({ drops }) => {
   const [loot, setLoot] = useState([])
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(0) //Killed x amount of times
+  const [autokill, setAutokill] = useState(false)
   let existedLoot
   let newLoot = loot //do not mutate state directly
 
@@ -41,7 +44,7 @@ const Loot = ({ drops }) => {
     }
   }
 
-  const handleClick = (drops) => {
+  const generateLoot = (drops) => {
     let updatedQuantity
     let stillSearching = null //checks if a loot has been found yet
     setCounter(counter + 1)
@@ -52,7 +55,7 @@ const Loot = ({ drops }) => {
         if (drops[i].rarity === 1) {
           //skip reward casket (aberrant spectre)
           if (drops[i].name.includes("Reward casket")) {
-            console.log("hit")
+            //console.log("hit")
             continue
           }
           existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
@@ -93,7 +96,6 @@ const Loot = ({ drops }) => {
         if (stillSearching === null && drops[i].rarity !== 1) {
           const random = Math.random() //rarity roll for each item
           if (random <= drops[i].rarity) {
-            console.log("hit")
             existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
             //handle rolls
             //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
@@ -128,95 +130,133 @@ const Loot = ({ drops }) => {
           }
         }
       }
-      console.log(stillSearching)
+      //console.log(stillSearching)
       return newLoot
     })
+  }
+  // setLoot((prevLoot) => {
+  //   for (let i = 0; i <= drops.length; i++) {
+  //     const random = Math.random() //rarity roll for each item
+  //     if (drops[i].rarity === 1) {
+  //       //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
+  //       //make it drop all the following loops?
+  //       //skip reward casket
+  //       if (drops[i].name.includes("Reward casket")) {
+  //         console.log("hit")
+  //         continue
+  //       }
+  //       existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
 
-    // setLoot((prevLoot) => {
-    //   for (let i = 0; i <= drops.length; i++) {
-    //     const random = Math.random() //rarity roll for each item
-    //     if (drops[i].rarity === 1) {
-    //       //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
-    //       //make it drop all the following loops?
-    //       //skip reward casket
-    //       if (drops[i].name.includes("Reward casket")) {
-    //         console.log("hit")
-    //         continue
-    //       }
-    //       existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
+  //       if (existedLoot) {
+  //         //cover the case if the rarity === 1 loot is singular or a range
+  //         if (drops[i].quantity.includes("-")) {
+  //           updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
+  //         } else {
+  //           updatedQuantity =
+  //             parseInt(rollQuantity(drops[i].quantity, existedLoot)) +
+  //             parseInt(existedLoot.quantity)
+  //         }
+  //         const updatedLoot = {
+  //           ...existedLoot,
+  //           quantity: updatedQuantity,
+  //         }
 
-    //       if (existedLoot) {
-    //         //cover the case if the rarity === 1 loot is singular or a range
-    //         if (drops[i].quantity.includes("-")) {
-    //           updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
-    //         } else {
-    //           updatedQuantity =
-    //             parseInt(rollQuantity(drops[i].quantity, existedLoot)) +
-    //             parseInt(existedLoot.quantity)
-    //         }
-    //         const updatedLoot = {
-    //           ...existedLoot,
-    //           quantity: updatedQuantity,
-    //         }
+  //         //replace updated loot
+  //         newLoot = newLoot.map((loo) =>
+  //           loo.id !== drops[i].id ? loo : updatedLoot
+  //         )
+  //       } else {
+  //         // first time
+  //         //roll quantity
+  //         const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
+  //         const updatedLoot = {
+  //           ...drops[i],
+  //           quantity: updatedQuantity,
+  //         } //update new quantity for loot
+  //         newLoot = [...newLoot, updatedLoot]
+  //       }
+  //     } else if (random <= drops[i].rarity) {
+  //       existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
+  //       //handle rolls
+  //       //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
+  //       if (existedLoot) {
+  //         const updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
+  //         const updatedLoot = {
+  //           ...existedLoot,
+  //           quantity: updatedQuantity,
+  //         }
 
-    //         //replace updated loot
-    //         newLoot = newLoot.map((loo) =>
-    //           loo.id !== drops[i].id ? loo : updatedLoot
-    //         )
-    //       } else {
-    //         // first time
-    //         //roll quantity
-    //         const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
-    //         const updatedLoot = {
-    //           ...drops[i],
-    //           quantity: updatedQuantity,
-    //         } //update new quantity for loot
-    //         newLoot = [...newLoot, updatedLoot]
-    //       }
-    //     } else if (random <= drops[i].rarity) {
-    //       existedLoot = prevLoot.find((l) => l.id === drops[i].id) //check if already exists
-    //       //handle rolls
-    //       //detect if drop already exists in loot array, add quantity to it, else create new drop with quantity
-    //       if (existedLoot) {
-    //         const updatedQuantity = rollQuantity(drops[i].quantity, existedLoot)
-    //         const updatedLoot = {
-    //           ...existedLoot,
-    //           quantity: updatedQuantity,
-    //         }
+  //         //replace updated loot
+  //         newLoot = newLoot.map((loo) =>
+  //           loo.id !== drops[i].id ? loo : updatedLoot
+  //         )
+  //         return newLoot
+  //       } else {
+  //         //first time drop appears in loot array
+  //         const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
+  //         const updatedLoot = {
+  //           ...drops[i],
+  //           quantity: updatedQuantity,
+  //         } //update new quantity for loot
+  //         //newLoot.push(updatedLoot)
+  //         newLoot = [...newLoot, updatedLoot]
+  //         return newLoot
+  //       }
+  //     }
+  //     //if it reaches the end of the drop table and hasnt rolled a drop
+  //     if (i === drops.length - 1) {
+  //       console.log("no drops")
+  //       return newLoot
+  //     }
+  //   }
+  //   console.log("never reaches here", newLoot)
+  //   return newLoot
+  // })
 
-    //         //replace updated loot
-    //         newLoot = newLoot.map((loo) =>
-    //           loo.id !== drops[i].id ? loo : updatedLoot
-    //         )
-    //         return newLoot
-    //       } else {
-    //         //first time drop appears in loot array
-    //         const updatedQuantity = rollQuantity(drops[i].quantity, drops[i])
-    //         const updatedLoot = {
-    //           ...drops[i],
-    //           quantity: updatedQuantity,
-    //         } //update new quantity for loot
-    //         //newLoot.push(updatedLoot)
-    //         newLoot = [...newLoot, updatedLoot]
-    //         return newLoot
-    //       }
-    //     }
-    //     //if it reaches the end of the drop table and hasnt rolled a drop
-    //     if (i === drops.length - 1) {
-    //       console.log("no drops")
-    //       return newLoot
-    //     }
-    //   }
-    //   console.log("never reaches here", newLoot)
-    //   return newLoot
-    // })
+  const autoKill = () => {
+    {
+      let interval = setInterval(() => {
+        generateLoot(drops)
+        if (!autokill) {
+          console.log("clear")
+          clearInterval(interval)
+        }
+      }, 600)
+    }
+    return
   }
 
   return (
     <div>
-      <p>Killed {counter} times</p>
-      <Button color="primary" onClick={() => handleClick(drops)}>
+      <p>Killed {counter}x times</p>
+      <p>{autokill}</p>
+      <FormControlLabel
+        value="top"
+        control={
+          <Switch
+            color="primary"
+            onChange={() => {
+              setAutokill(!autokill)
+              console.log(autokill)
+            }}
+            checked={autokill}
+          />
+        }
+        label="Autokill"
+        labelPlacement="top"
+      />
+      <br></br>
+      <Button id="kill" color="primary" onClick={() => generateLoot(drops)}>
         generate loot
+      </Button>
+      <Button
+        color="secondary"
+        onClick={() => {
+          setCounter(0)
+          setLoot([])
+        }}
+      >
+        reset loot
       </Button>
       <div>
         {loot.map((drop) => (
