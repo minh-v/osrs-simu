@@ -213,23 +213,16 @@ const Loot = ({ drops }) => {
   //   return newLoot
   // })
 
-  const autoKill = () => {
-    {
-      let interval = setInterval(() => {
-        generateLoot(drops)
-        if (!autokill) {
-          console.log("clear")
-          clearInterval(interval)
-        }
-      }, 600)
-    }
-    return
-  }
+  if (autokill) setTimeout(() => document.getElementById("kill").click(), 600)
+  //constantly rerendering itself
+  // var intervalId = window.setInterval(function () {
+  //   generateLoot(drops)
+  //   if (!autokill) clearInterval(intervalId)
+  // }, 600)
 
   return (
     <div>
       <p>Killed {counter}x times</p>
-      <p>{autokill}</p>
       <FormControlLabel
         value="top"
         control={
@@ -237,7 +230,6 @@ const Loot = ({ drops }) => {
             color="primary"
             onChange={() => {
               setAutokill(!autokill)
-              console.log(autokill)
             }}
             checked={autokill}
           />

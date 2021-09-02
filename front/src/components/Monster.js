@@ -8,7 +8,7 @@ const Monster = ({ monster }) => {
     <div>
       <h1>{monster.name}</h1>
       <img className="monsterImage" src={imgSrc} alt="monster pic" />
-      <h2>Lootage</h2>
+      <h2>Loot</h2>
       <Loot key={monster.id} drops={monster.drops} />
     </div>
   )
