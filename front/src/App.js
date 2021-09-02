@@ -3,6 +3,8 @@ import Monster from "./components/Monster"
 import List from "./components/List"
 import monsterService from "./services/monsters"
 
+//LESSON LEARNED: DO NOT ASSUME API PATTERNS INSTANTLY, WILL NEED TO DEAL WITH NICHE API
+
 const App = () => {
   const [monsters, setMonsters] = useState([]) //objects of all the monsters
   const [unique, setUnique] = useState([]) //used to detect duplicate monster names
