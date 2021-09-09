@@ -3,11 +3,14 @@ import Monster from "./components/Monster"
 import List from "./components/List"
 import monsterService from "./services/monsters"
 
-//LESSON LEARNED: DO NOT ASSUME API PATTERNS INSTANTLY, WILL NEED TO DEAL WITH NICHE API
+//LESSON LEARNED: DO NOT ASSUME API PATTERNS IMMEDIATELY, WILL NEED TO DEAL WITH NICHE API
+
+//https://prices.runescape.wiki/api/v1/osrs/latest GET ITEM PRICES FROM HERE TO SORT BY
+//fetch item api
+//fetch monster api
 
 const App = () => {
   const [monsters, setMonsters] = useState([]) //objects of all the monsters
-  const [unique, setUnique] = useState([]) //used to detect duplicate monster names
   const [selected, setSelected] = useState({
     _id: "610b62f06d4abbe9cf68e011",
     id: "1",
@@ -263,24 +266,9 @@ const App = () => {
       },
     },
   }) //selected monster, initially first monster (molanisk)
-  const baseUrl = "https://api.osrsbox.com/monsters" //pls cache the monster/item api for the love of god
 
   useEffect(() => {
-    monsterService.fetchData(baseUrl).then((initialMonsters) => {
-      let seen = new Set(unique)
-      const uniqueMonsters = initialMonsters.filter((monster) => {
-        if (seen.has(monster.name)) {
-          return false
-        } else {
-          seen.add(monster.name)
-          return true
-        }
-      })
-      setMonsters(monsters.concat(uniqueMonsters))
-      setUnique(unique.concat(Array.from(seen)))
-      console.log(monsters)
-      setSelected(uniqueMonsters[0])
-    })
+    monsterService.getAll().then((res) => setMonsters(res))
   }, [])
 
   return (

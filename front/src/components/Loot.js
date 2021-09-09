@@ -213,12 +213,7 @@ const Loot = ({ drops }) => {
   //   return newLoot
   // })
 
-  if (autokill) setTimeout(() => document.getElementById("kill").click(), 600)
-  //constantly rerendering itself
-  // var intervalId = window.setInterval(function () {
-  //   generateLoot(drops)
-  //   if (!autokill) clearInterval(intervalId)
-  // }, 600)
+  if (autokill) setTimeout(() => document.getElementById("kill").click(), 300)
 
   return (
     <div>
