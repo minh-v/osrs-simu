@@ -2,3 +2,16 @@
   width: 200px;
   height: auto
 }
+
+@font-face {
+  font-family: 'osrs-font';
+  font-weight: normal;
+  font-style: normal;
+  src: local('osrs-font'), url(./fonts/osrs-font.woff) format('woff');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+
+.lootText { 
+  font-family: 'osrs-font'
+}

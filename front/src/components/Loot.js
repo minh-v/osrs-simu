@@ -247,7 +247,7 @@ const Loot = ({ drops }) => {
       </Button>
       <div>
         {loot.map((drop) => (
-          <div key={drop.id}>
+          <div key={drop.id} className="lootText">
             <p>
               {drop.name} {drop.quantity}
             </p>
