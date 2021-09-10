@@ -258,14 +258,13 @@ const Loot = ({ drops }) => {
           onClick={() => {
             setCounter(0)
             setLoot([])
-            setAutokill(false)
           }}
         >
           reset loot
         </Button>
         {/* <Button color="black" onClick={() => setShowPrice(!showPrice)}>
           show /hideprice
-        </Button> */}
+        </Button> change this to switch actually*/}
       </div>
       <div>
         {loot
