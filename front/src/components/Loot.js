@@ -215,6 +215,20 @@ const Loot = ({ drops }) => {
   //   return newLoot
   // })
 
+  const convertQuantity = (quantity) => {
+    if (quantity < 100000) {
+      return quantity
+    } else if (quantity >= 100000 && quantity < 1000000) {
+      return Math.floor(quantity / 1000)
+        .toString()
+        .concat("K")
+    } else if (quantity >= 1000000) {
+      return Math.floor(quantity / 100000)
+        .toString()
+        .concat("m")
+    }
+  }
+
   if (autokill) setTimeout(() => document.getElementById("kill").click(), 150)
   //can turn values on or off with conditional -> {drop.price * drop.quantity}
   return (
@@ -244,10 +258,14 @@ const Loot = ({ drops }) => {
           onClick={() => {
             setCounter(0)
             setLoot([])
+            setAutokill(false)
           }}
         >
           reset loot
         </Button>
+        {/* <Button color="black" onClick={() => setShowPrice(!showPrice)}>
+          show /hideprice
+        </Button> */}
       </div>
       <div>
         {loot
@@ -255,9 +273,11 @@ const Loot = ({ drops }) => {
             return b.price * b.quantity - a.price * a.quantity
           })
           .map((drop) => (
+            // quantityDisplay function here, converting 100,000 to 100k
+
             <div key={drop.id} className="lootText">
               <p>
-                {drop.name} {drop.quantity}
+                {drop.name} {convertQuantity(drop.quantity)}
               </p>
               <img
                 src={`https://chisel.weirdgloop.org/static/img/osrs-sprite/${drop.id}.png`}
