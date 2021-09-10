@@ -45,6 +45,7 @@ const Loot = ({ drops }) => {
   }
 
   const generateLoot = (drops) => {
+    //subtract roll to
     let updatedQuantity
     let stillSearching = null //checks if a loot has been found yet
     setCounter(counter + 1)
@@ -246,17 +247,21 @@ const Loot = ({ drops }) => {
         reset loot
       </Button>
       <div>
-        {loot.map((drop) => (
-          <div key={drop.id} className="lootText">
-            <p>
-              {drop.name} {drop.quantity}
-            </p>
-            <img
-              src={`https://chisel.weirdgloop.org/static/img/osrs-sprite/${drop.id}.png`}
-              alt="drop pic"
-            />
-          </div>
-        ))}
+        {loot
+          .sort((a, b) => {
+            return b.price * b.quantity - a.price * a.quantity
+          })
+          .map((drop) => (
+            <div key={drop.id} className="lootText">
+              <p>
+                {drop.name} {drop.quantity} {drop.price * drop.quantity}
+              </p>
+              <img
+                src={`https://chisel.weirdgloop.org/static/img/osrs-sprite/${drop.id}.png`}
+                alt="drop pic"
+              />
+            </div>
+          ))}
       </div>
     </div>
   )
