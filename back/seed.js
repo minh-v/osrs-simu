@@ -57,7 +57,7 @@ const seed = async () => {
 
   //add unique monsters array to mongodb
   uniqueMonsters.map((monster) => {
-    //edit items drop array here to include the base64 icon, as well as price
+    //edit items drop array here to include the price (and base64 icon)
     monster.drops.forEach((drop) => {
       let foundItem = itemPrices.find((item) => parseInt(item.id) === drop.id)
 

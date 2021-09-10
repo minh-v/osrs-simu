@@ -1,6 +1,7 @@
 .monsterImage {
   width: 200px;
-  height: auto
+  height: auto;
+
 }
 
 @font-face {
@@ -13,5 +14,12 @@
 }
 
 .lootText { 
-  font-family: 'osrs-font'
+  font-family: 'osrs-font';
+  display: inline-block;
+  zoom:1;
+  *display:inline;
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+  line-height: 50px;
 }

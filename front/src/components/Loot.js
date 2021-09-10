@@ -215,7 +215,7 @@ const Loot = ({ drops }) => {
   //   return newLoot
   // })
 
-  if (autokill) setTimeout(() => document.getElementById("kill").click(), 300)
+  if (autokill) setTimeout(() => document.getElementById("kill").click(), 150)
   //can turn values on or off with conditional -> {drop.price * drop.quantity}
   return (
     <div>
@@ -272,7 +272,7 @@ export default Loot
 
 /*
 const handleClick = (drops) => {
-    //console.log("generate lootage")
+    //console.log("generate loot")
     //too slow with full bject? just make it contain id and quantity
     drops.every((drop) => {
       console.log(drop.name, drop.rarity)
