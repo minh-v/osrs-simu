@@ -6,9 +6,12 @@ const Monster = ({ monster }) => {
   // monster image
   return (
     <div>
-      <h1>{monster.name}</h1>
-      <img className="monsterImage" src={imgSrc} alt="monster pic" />
-      <h2>Loot</h2>
+      <div className="monster">
+        <h1>{monster.name}</h1>
+        <img className="monsterImage" src={imgSrc} alt="monster pic" />
+        <h2>Loot</h2>
+      </div>
+
       <Loot key={monster.id} drops={monster.drops} />
     </div>
   )

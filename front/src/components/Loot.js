@@ -219,34 +219,36 @@ const Loot = ({ drops }) => {
   //can turn values on or off with conditional -> {drop.price * drop.quantity}
   return (
     <div>
-      <p>Killed {counter}x times</p>
-      <FormControlLabel
-        value="top"
-        control={
-          <Switch
-            color="primary"
-            onChange={() => {
-              setAutokill(!autokill)
-            }}
-            checked={autokill}
-          />
-        }
-        label="Autokill"
-        labelPlacement="top"
-      />
-      <br></br>
-      <Button id="kill" color="primary" onClick={() => generateLoot(drops)}>
-        generate loot
-      </Button>
-      <Button
-        color="secondary"
-        onClick={() => {
-          setCounter(0)
-          setLoot([])
-        }}
-      >
-        reset loot
-      </Button>
+      <div className="monster">
+        <p>Killed {counter}x times</p>
+        <FormControlLabel
+          value="top"
+          control={
+            <Switch
+              color="primary"
+              onChange={() => {
+                setAutokill(!autokill)
+              }}
+              checked={autokill}
+            />
+          }
+          label="Autokill"
+          labelPlacement="top"
+        />
+        <br></br>
+        <Button id="kill" color="primary" onClick={() => generateLoot(drops)}>
+          generate loot
+        </Button>
+        <Button
+          color="secondary"
+          onClick={() => {
+            setCounter(0)
+            setLoot([])
+          }}
+        >
+          reset loot
+        </Button>
+      </div>
       <div>
         {loot
           .sort((a, b) => {
