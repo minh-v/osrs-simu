@@ -52,13 +52,16 @@ const seed = async () => {
     itemPrices = prices
   })
 
+  //remove monster from array if has no drops.. why loot simulator if no drops?
+  uniqueMonsters = uniqueMonsters.filter((monster) => monster.drops.length > 0)
+
   //add unique monsters array to mongodb
   uniqueMonsters.map((monster) => {
     //edit items drop array here to include the base64 icon, as well as price
     monster.drops.forEach((drop) => {
       let foundItem = itemPrices.find((item) => parseInt(item.id) === drop.id)
 
-      drop.price = foundItem === undefined ? 0 : foundItem.price
+      drop.price = foundItem === undefined ? 1 : foundItem.price
     })
     new Monster({ monster })
   })

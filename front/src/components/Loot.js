@@ -17,7 +17,8 @@ alt="bones"
 //then iterate again attempting to roll for each drop?
 //refactor the whole loop again, 2 for loops returning newLoot at the very end, after the first drop in the second array
 
-//implement autokiller
+//get high alch value, set to price if undefined
+//along with the icon when getting item api
 
 const Loot = ({ drops }) => {
   const [loot, setLoot] = useState([])
@@ -215,7 +216,7 @@ const Loot = ({ drops }) => {
   // })
 
   if (autokill) setTimeout(() => document.getElementById("kill").click(), 300)
-
+  //can turn values on or off with conditional -> {drop.price * drop.quantity}
   return (
     <div>
       <p>Killed {counter}x times</p>
@@ -254,7 +255,7 @@ const Loot = ({ drops }) => {
           .map((drop) => (
             <div key={drop.id} className="lootText">
               <p>
-                {drop.name} {drop.quantity} {drop.price * drop.quantity}
+                {drop.name} {drop.quantity}
               </p>
               <img
                 src={`https://chisel.weirdgloop.org/static/img/osrs-sprite/${drop.id}.png`}
