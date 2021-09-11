@@ -1,6 +1,17 @@
 import axios from "axios"
+import { gql, useQuery } from "@apollo/client"
 //test
-const baseUrl = "http://localhost:3001/api/monsters"
+const baseUrl = "http://localhost:4000/graphql"
+const monsters = gql`
+  query {
+    monsters {
+      name
+      id
+      drops
+      examine
+    }
+  }
+`
 
 const getAll = () => {
   const req = axios.get(baseUrl)

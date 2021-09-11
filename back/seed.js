@@ -1,6 +1,5 @@
 const axios = require("axios")
-const { reset } = require("nodemon")
-const Monster = require("./models/Monster")
+const Monster = require("./src/db/models/Monster")
 
 const fetchMonsterData = (url, prevResponse = []) => {
   return axios
@@ -70,6 +69,7 @@ const seed = async () => {
   Monster.insertMany(uniqueMonsters).then((result) => {
     console.log("saved!")
     //mongoose.connection.close()
+    mongoose.connection.close()
   })
 }
 

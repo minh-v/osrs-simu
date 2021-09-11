@@ -1,26 +1,40 @@
-const express = require("express")
+const { ApolloServer } = require("apollo-server")
+const connect = require("./src/connect")
 const cors = require("cors")
-const Monster = require("./models/monster")
+//const Monster = require("./src/db/models/monster")
+const typeDefs = require("./src/graphql/typeDefs")
+const resolvers = require("./src/graphql/resolvers")
 require("dotenv").config()
 
-const app = express()
-app.use(cors())
-
-app.get("/", (req, res) => {
-  res.send("<h1>Hello World!</h1>")
+//how to determine if you want to search from the api itself, or host it's data on your own db/server?
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 })
 
-app.get("/api/monsters", (req, res) => {
-  Monster.find({}).then((monsters) => {
-    res.json(monsters)
-  })
+server.listen().then(({ url }) => {
+  console.log(`Server ready at ${url}`)
 })
 
-app.get("/api/monsters/:id", (req, res) => {
-  Monster.find({ id: req.params.id }).then((monster) => res.json(monster))
-})
+//express server
+// const app = express()
+// app.use(cors())
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+// app.get("/", (req, res) => {
+//   res.send("<h1>Hello World!</h1>")
+// })
+
+// app.get("/api/monsters", (req, res) => {
+//   Monster.find({}).then((monsters) => {
+//     res.json(monsters)
+//   })
+// })
+
+// app.get("/api/monsters/:id", (req, res) => {
+//   Monster.find({ id: req.params.id }).then((monster) => res.json(monster))
+// })
+
+// const PORT = process.env.PORT || 3001
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`)
+// })

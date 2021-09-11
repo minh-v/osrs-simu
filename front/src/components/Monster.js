@@ -9,6 +9,7 @@ const Monster = ({ monster }) => {
       <div className="monster">
         <h1>{monster.name}</h1>
         <img className="monsterImage" src={imgSrc} alt="monster pic" />
+        <p>{monster.examine}</p>
         <h2>Loot</h2>
       </div>
 
