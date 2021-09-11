@@ -12,7 +12,7 @@ const List = ({ monsters, selected, setSelected }) => {
         }}
         id="combo-box-demo"
         options={monsters}
-        getOptionLabel={(monster) => monster.name} //name
+        getOptionLabel={(monster) => monster.name || ""} //name
         style={{ width: 300 }}
         renderInput={(params) => (
           <TextField {...params} label="Monster" variant="outlined" />

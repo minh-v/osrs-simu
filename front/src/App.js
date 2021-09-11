@@ -34,7 +34,6 @@ const App = () => {
   //const [loaded, setLoaded] = useState(false)
   const [selected, setSelected] = useState({})
   const [getMonsters, { loading, error, data }] = useLazyQuery(MONSTERS)
-  console.log(loading)
 
   //only want to call query on the first render
   useEffect(() => {
