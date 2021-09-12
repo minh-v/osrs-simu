@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Monster from "./components/Monster"
+import Pick from "./components/Pick"
 import List from "./components/List"
 //import monsterService from "./services/monsters"
 
@@ -60,6 +61,7 @@ const App = () => {
         selected={selected}
         setSelected={setSelected}
       />
+      <Pick monsters={data.monsters} />
       {selected && <Monster monster={selected} />}
     </div>
   )

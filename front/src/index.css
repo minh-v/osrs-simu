@@ -4,6 +4,15 @@
 
 }
 
+.cardImage {
+  width: 150px;
+  height: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
+}
+
 @font-face {
   font-family: 'osrs-font';
   font-weight: normal;
