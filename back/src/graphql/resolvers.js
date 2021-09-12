@@ -1,4 +1,4 @@
-const Monster = require("../db/models/Monster")
+const Monster = require("../db/models/monster")
 
 //Monster.find({}).then((res) => console.log(res))
 const resolvers = {
