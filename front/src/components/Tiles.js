@@ -19,7 +19,7 @@ const Tiles = ({ monsters }) => {
               data-toggle="modal"
             />
             <img
-              src={`https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`}
+              src={`/monsterImages/${monster.id}_288.png`}
               class="card-img-top"
               alt="..."
               className="cardImage"
