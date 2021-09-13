@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Monster from "./components/Monster"
-import Pick from "./components/Pick"
-import List from "./components/List"
+import Tiles from "./components/Tiles"
 //import monsterService from "./services/monsters"
 
 //LESSON LEARNED: DO NOT ASSUME API PATTERNS IMMEDIATELY, WILL NEED TO DEAL WITH NICHE API
@@ -33,8 +31,17 @@ const MONSTERS = gql`
 const App = () => {
   //const [monsters, setMonsters] = useState([]) //objects of all the monsters
   //const [loaded, setLoaded] = useState(false)
-  const [selected, setSelected] = useState({})
+  const [selected, setSelected] = useState([])
+  const [search, setSearch] = useState({})
   const [getMonsters, { loading, error, data }] = useLazyQuery(MONSTERS)
+  //let monstersToShow
+  const handleSearch = (event) => {
+    setSelected(
+      data.monsters.filter((monster) =>
+        monster.name.toLowerCase().includes(event.target.value.toLowerCase())
+      )
+    )
+  }
 
   //only want to call query on the first render
   useEffect(() => {
@@ -42,8 +49,10 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    // monsterService.getAll().then((res) => setMonsters(res))
-    if (loading === false && data) setSelected(data.monsters[0])
+    if (loading === false && data) {
+      // monstersToShow = selected.length === 0 ? data.monsters : selected
+      // setSelected(monstersToShow)
+    }
   }, [data, loading])
 
   // useEffect(() => {
@@ -53,16 +62,21 @@ const App = () => {
   if (loading || !data) {
     return <h1>loading...</h1>
   }
+  const monstersToShow = selected.length === 0 ? data.monsters : selected
 
   return (
-    <div>
-      <List
+    <div class="container">
+      {/* <List
         monsters={data.monsters}
         selected={selected}
         setSelected={setSelected}
-      />
-      <Pick monsters={data.monsters} />
-      {selected && <Monster monster={selected} />}
+      /> */}
+      {/* <Pick monsters={data.monsters} /> */}
+      <form>
+        <input onChange={handleSearch} />{" "}
+      </form>
+      {/* {selected && <Monster monster={selected} />} */}
+      <Tiles monsters={monstersToShow} />
     </div>
   )
 }

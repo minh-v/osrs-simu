@@ -50,16 +50,15 @@ const Pick = ({ monsters }) => {
               <div class="container-fluid">
                 <div class="row row-cols-1 row-cols-md-4 g-4">
                   {monsters.map((monster) => (
-                    <div class="col">
+                    <div class="col" key={monster.id}>
                       <div class="card">
-                        <a href="https://google.com" class="stretched-link">
-                          <img
-                            src={`https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`}
-                            class="card-img-top"
-                            alt="..."
-                            className="cardImage"
-                          />
-                        </a>
+                        <a href="https://google.com" class="stretched-link" />
+                        <img
+                          src={`https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`}
+                          class="card-img-top"
+                          alt="..."
+                          className="cardImage"
+                        />
                         <div class="card-body">
                           <h5 class="card-title">{monster.name}</h5>
                         </div>
