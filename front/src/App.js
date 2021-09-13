@@ -73,7 +73,7 @@ const App = () => {
       /> */}
       {/* <Pick monsters={data.monsters} /> */}
       <form>
-        <input onChange={handleSearch} />{" "}
+        <input onChange={handleSearch} placeholder="search monster" />{" "}
       </form>
       {/* {selected && <Monster monster={selected} />} */}
       <Tiles monsters={monstersToShow} />
