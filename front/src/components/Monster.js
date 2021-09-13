@@ -2,7 +2,7 @@ import React from "react"
 import Loot from "./Loot"
 
 const Monster = ({ monster }) => {
-  const imgSrc = `https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`
+  const imgSrc = `/monsterImages/${monster.id}_288.png`
   // monster image
   return (
     <div>

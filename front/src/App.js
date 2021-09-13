@@ -48,13 +48,6 @@ const App = () => {
     getMonsters()
   }, [])
 
-  useEffect(() => {
-    if (loading === false && data) {
-      // monstersToShow = selected.length === 0 ? data.monsters : selected
-      // setSelected(monstersToShow)
-    }
-  }, [data, loading])
-
   // useEffect(() => {
   //   setSelected(monsters[0])
   // }, [monsters])
@@ -62,6 +55,8 @@ const App = () => {
   if (loading || !data) {
     return <h1>loading...</h1>
   }
+
+  //search filter
   const monstersToShow = selected.length === 0 ? data.monsters : selected
 
   return (
