@@ -20,6 +20,8 @@ alt="bones"
 //get high alch value, set to price if undefined
 //along with the icon when getting item api
 
+//change switch and buttons to bootstrap
+
 const Loot = ({ drops }) => {
   const [loot, setLoot] = useState([])
   const [counter, setCounter] = useState(0) //Killed x amount of times
@@ -215,6 +217,8 @@ const Loot = ({ drops }) => {
   //   return newLoot
   // })
 
+  //convert text
+  //change classname to green, yellow, white etc.
   const convertQuantity = (quantity) => {
     if (quantity < 100000) {
       return quantity
@@ -229,7 +233,8 @@ const Loot = ({ drops }) => {
     }
   }
 
-  //doesnt work
+  //doesnt work, turns off immediately
+  console.log(autokill)
   if (autokill) setTimeout(() => document.getElementById("kill").click(), 150)
   //can turn values on or off with conditional -> {drop.price * drop.quantity}
   return (
@@ -251,18 +256,24 @@ const Loot = ({ drops }) => {
           labelPlacement="top"
         />
         <br></br>
-        <Button id="kill" color="primary" onClick={() => generateLoot(drops)}>
-          generate loot
-        </Button>
-        <Button
-          color="secondary"
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="kill"
+          onClick={() => generateLoot(drops)}
+        >
+          kill
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
           onClick={() => {
             setCounter(0)
             setLoot([])
           }}
         >
-          reset loot
-        </Button>
+          Reset loot
+        </button>
         {/* <Button color="black" onClick={() => setShowPrice(!showPrice)}>
           show /hideprice
         </Button> change this to switch actually*/}
