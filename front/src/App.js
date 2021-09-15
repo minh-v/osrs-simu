@@ -53,14 +53,21 @@ const App = () => {
   // }, [monsters])
 
   if (loading || !data) {
-    return <h1>loading...</h1>
+    //center spinner
+    return (
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border " role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    )
   }
 
   //search filter
   const monstersToShow = search.length === 0 ? data.monsters : search
 
   return (
-    <div class="container">
+    <div class="container bg-dark">
       <form>
         <input onChange={handleSearch} placeholder="search monster" />{" "}
       </form>

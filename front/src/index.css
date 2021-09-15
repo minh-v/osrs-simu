@@ -1,6 +1,9 @@
 /* stop scrolling when open modal
 bootstrap attaches modal-open to body when modal is open
 */
+body {
+  background-color: grey;
+}
 body.modal-open {
   height: 100vh;
   overflow-y: hidden;
