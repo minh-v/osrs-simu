@@ -8,7 +8,7 @@ import Tiles from "./components/Tiles"
 //fetch item api
 //fetch monster api
 
-import { gql, useQuery, useLazyQuery } from "@apollo/client"
+import { gql, useLazyQuery } from "@apollo/client"
 //test
 const MONSTERS = gql`
   query {
@@ -31,12 +31,12 @@ const MONSTERS = gql`
 const App = () => {
   //const [monsters, setMonsters] = useState([]) //objects of all the monsters
   //const [loaded, setLoaded] = useState(false)
-  const [selected, setSelected] = useState([])
-  const [search, setSearch] = useState({})
+  //const [selected, setSelected] = useState([])
+  const [search, setSearch] = useState([])
   const [getMonsters, { loading, error, data }] = useLazyQuery(MONSTERS)
   //let monstersToShow
   const handleSearch = (event) => {
-    setSelected(
+    setSearch(
       data.monsters.filter((monster) =>
         monster.name.toLowerCase().includes(event.target.value.toLowerCase())
       )
@@ -57,16 +57,10 @@ const App = () => {
   }
 
   //search filter
-  const monstersToShow = selected.length === 0 ? data.monsters : selected
+  const monstersToShow = search.length === 0 ? data.monsters : search
 
   return (
     <div class="container">
-      {/* <List
-        monsters={data.monsters}
-        selected={selected}
-        setSelected={setSelected}
-      /> */}
-      {/* <Pick monsters={data.monsters} /> */}
       <form>
         <input onChange={handleSearch} placeholder="search monster" />{" "}
       </form>

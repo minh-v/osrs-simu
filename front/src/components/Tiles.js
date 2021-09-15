@@ -1,5 +1,7 @@
 import React from "react"
-import Monster from "./Monster"
+import MonsterModal from "./MonsterModal"
+
+//need to dynamically render this
 
 const Tiles = ({ monsters }) => {
   //   const monsterName = monsters.map((monster) => {
@@ -28,20 +30,7 @@ const Tiles = ({ monsters }) => {
               <h5 class="card-title">{monster.name}</h5>
             </div>
           </div>
-          <div id={`${monster.id}`} class="modal fade" role="dialog">
-            <div class="modal-dialog modal-fullscreen">
-              <div class="modal-content">
-                <div class="modal-header text-center">
-                  <button type="button" class="close " data-dismiss="modal">
-                    &times;
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <Monster monster={monster} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <MonsterModal monster={monster} />
         </div>
       ))}
     </div>
