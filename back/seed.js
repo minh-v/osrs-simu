@@ -98,9 +98,6 @@ const seed = async () => {
       downloadFile(monsterImageUrl, "monsterImages")
       console.log("finished", monster.name)
     }, i * 100)
-    // const monsterImageUrl = `https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`
-    // downloadFile(monsterImageUrl, "monsterImages")
-    // console.log("finished", monster.name)
   })
 
   return
