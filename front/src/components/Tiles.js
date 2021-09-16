@@ -15,22 +15,23 @@ const Tiles = ({ monsters }) => {
     <div class="row row-cols-9 gx-2 gy-2">
       {monsters.map((monster) => (
         <div class="col" key={monster.id}>
-          <div class="card ">
+          <div class="card">
             <a
-              href={`#${monster.id}`}
+              href={`${monster.id}`}
               class="stretched-link"
-              data-target={`#${monster.id}`}
-              data-toggle="modal"
-            />
-            <img
-              src={`/monsterImages/${monster.id}_288.png`}
-              class="card-img-top"
-              alt="..."
-              className="cardImage"
-            />
-            <div class="card-body">
-              <h5 class="card-title">{monster.name}</h5>
-            </div>
+              data-bs-target={`#id${monster.id}`}
+              data-bs-toggle="modal"
+            >
+              <img
+                src={`/monsterImages/${monster.id}_288.png`}
+                class="card-img-top"
+                alt="..."
+                className="cardImage"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{monster.name}</h5>
+              </div>
+            </a>
           </div>
           <MonsterModal monster={monster} />
         </div>
