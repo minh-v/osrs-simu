@@ -21,26 +21,3 @@ server.applyMiddleware({ app })
 app.listen({ port: process.env.PORT || 3001 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`)
 })
-
-//express server
-// const app = express()
-// app.use(cors())
-
-// app.get("/", (req, res) => {
-//   res.send("<h1>Hello World!</h1>")
-// })
-
-// app.get("/api/monsters", (req, res) => {
-//   Monster.find({}).then((monsters) => {
-//     res.json(monsters)
-//   })
-// })
-
-// app.get("/api/monsters/:id", (req, res) => {
-//   Monster.find({ id: req.params.id }).then((monster) => res.json(monster))
-// })
-
-// const PORT = process.env.PORT || 3001
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`)
-// })
