@@ -2,6 +2,8 @@ const axios = require("axios")
 const Monster = require("./src/db/models/Monster")
 const fs = require("fs")
 const path = require("path")
+const connect = require("./src/connect")
+const mongoose = require("mongoose")
 
 const fetchMonsterData = (url, prevResponse = []) => {
   return axios
@@ -91,16 +93,14 @@ const seed = async () => {
   //console.log(uniqueMonsters)
 
   //DOWNLOAD IMAGE HERE
-  uniqueMonsters.forEach((monster, i) => {
-    //set timeout
-    setTimeout(() => {
-      const monsterImageUrl = `https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`
-      downloadFile(monsterImageUrl, "monsterImages")
-      console.log("finished", monster.name)
-    }, i * 100)
-  })
-
-  return
+  // uniqueMonsters.forEach((monster, i) => {
+  //   //set timeout
+  //   setTimeout(() => {
+  //     const monsterImageUrl = `https://chisel.weirdgloop.org/static/img/osrs-npc/${monster.id}_288.png`
+  //     downloadFile(monsterImageUrl, "monsterImages")
+  //     console.log("finished", monster.name)
+  //   }, i * 100)
+  // })
 
   Monster.insertMany(uniqueMonsters).then((result) => {
     console.log("saved!")

@@ -23,6 +23,16 @@ const typeDefs = gql`
 `
 
 module.exports = gql`
+  type Monster {
+    name: String!
+    id: ID!
+    drops: [Drop]
+    examine: String
+    combat_level: Int
+    hitpoints: Int
+    max_hit: Int
+  }
+
   type Drop {
     id: ID!
     name: String!
@@ -30,13 +40,6 @@ module.exports = gql`
     rarity: Float
     rolls: Int
     price: Float
-  }
-
-  type Monster {
-    name: String!
-    id: ID!
-    drops: [Drop]
-    examine: String
   }
 
   type Query {

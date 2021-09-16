@@ -5,6 +5,9 @@ const monsterSchema = mongoose.Schema({
   id: String,
   drops: Array,
   examine: String,
+  combat_level: Number,
+  hipoints: Number,
+  max_hit: Number,
 })
 
 monsterSchema.set("toJSON", {

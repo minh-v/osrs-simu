@@ -7,7 +7,9 @@ const Monster = ({ monster }) => {
   return (
     <div>
       <div className="monster">
-        <h1>{monster.name}</h1>
+        <h1>
+          {monster.name} (Level-{monster.combat_level})
+        </h1>
         <img className="monsterImage" src={imgSrc} alt="monster pic" />
         <p>{monster.examine}</p>
         <h2>Loot</h2>

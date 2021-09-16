@@ -20,10 +20,7 @@ const Navbar = () => {
       </nav>
       <div class="collapse" id="collapseBar">
         <div class="bg-secondary p-4">
-          <a
-            class="text-white"
-            href="https://immense-ridge-37267.herokuapp.com/"
-          >
+          <a class="text-white" href=".">
             Monsters
           </a>
           <br></br>

@@ -25,6 +25,8 @@ const MONSTERS = gql`
         price
       }
       examine
+      combat_level
+      max_hit
     }
   }
 `
@@ -66,7 +68,7 @@ const App = () => {
 
   //search filter
   const monstersToShow = search.length === 0 ? data.monsters : search
-
+  console.log(monstersToShow[0])
   return (
     <>
       <Navbar />
