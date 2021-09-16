@@ -8,22 +8,6 @@ const typeDefs = require("./src/graphql/typeDefs")
 const resolvers = require("./src/graphql/resolvers")
 require("dotenv").config()
 
-// const app = express()
-// app.use(cors())
-// app.use(express.static("build"))
-
-// //how to determine if you want to search from the api itself, or host it's data on your own db/server?
-// const server = new ApolloServer({
-//   typeDefs,
-//   resolvers,
-// })
-
-// server.applyMiddleware({ app })
-
-// app.listen({ port: process.env.PORT || 3001 }).then(({ url }) => {
-//   console.log(`🚀 Server ready at ${url}`)
-// })
-
 async function startApolloServer(typeDefs, resolvers) {
   const app = express()
 
@@ -44,3 +28,19 @@ async function startApolloServer(typeDefs, resolvers) {
 }
 
 startApolloServer(typeDefs, resolvers)
+
+// const app = express()
+// app.use(cors())
+// app.use(express.static("build"))
+
+// //how to determine if you want to search from the api itself, or host it's data on your own db/server?
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+// })
+
+// server.applyMiddleware({ app })
+
+// app.listen({ port: process.env.PORT || 3001 }).then(({ url }) => {
+//   console.log(`🚀 Server ready at ${url}`)
+// })

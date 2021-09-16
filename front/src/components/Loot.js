@@ -166,7 +166,7 @@ const Loot = ({ drops }) => {
   }
 
   //doesnt work, turns off immediately
-  console.log(autokill)
+  //console.log(autokill)
   if (autokill) setTimeout(() => document.getElementById("kill").click(), 150)
   //can turn values on or off with conditional -> {drop.price * drop.quantity}
   return (
