@@ -7,8 +7,8 @@ const MonsterModal = ({ monster }) => {
       <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
           <div class="modal-header text-center">
-            <button type="button" class="close " data-dismiss="modal">
-              &times;
+            <button type="button" class="close" data-dismiss="modal">
+              &lt;
             </button>
           </div>
           <div class="modal-body">

@@ -1,5 +1,7 @@
 import React from "react"
 import MonsterModal from "./MonsterModal"
+import LazyLoad from "react-lazyload"
+//lazyload doesnt seem to help (initial loading)?
 
 //need to dynamically render this
 

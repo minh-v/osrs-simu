@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Tiles from "./components/Tiles"
+import Navbar from "./components/Navbar"
 //import monsterService from "./services/monsters"
 
 //LESSON LEARNED: DO NOT ASSUME API PATTERNS IMMEDIATELY, WILL NEED TO DEAL WITH NICHE API
@@ -9,7 +10,7 @@ import Tiles from "./components/Tiles"
 //fetch monster api
 
 import { gql, useLazyQuery } from "@apollo/client"
-//test
+
 const MONSTERS = gql`
   query {
     monsters {
@@ -67,13 +68,20 @@ const App = () => {
   const monstersToShow = search.length === 0 ? data.monsters : search
 
   return (
-    <div class="container bg-dark">
-      <form>
-        <input onChange={handleSearch} placeholder="search monster" />{" "}
-      </form>
-      {/* {selected && <Monster monster={selected} />} */}
-      <Tiles monsters={monstersToShow} />
-    </div>
+    <>
+      <Navbar />
+      <div class="container bg-dark">
+        <form>
+          <input
+            onChange={handleSearch}
+            placeholder="search monster"
+            className={"searchBar"}
+          />{" "}
+        </form>
+        {/* {selected && <Monster monster={selected} />} */}
+        <Tiles monsters={monstersToShow} />
+      </div>
+    </>
   )
 }
 

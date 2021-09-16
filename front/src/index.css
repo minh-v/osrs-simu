@@ -9,6 +9,11 @@ body.modal-open {
   overflow-y: hidden;
 }
 
+.searchBar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .monsterImage {
   width: 200px;
   height: auto;

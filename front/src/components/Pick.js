@@ -6,7 +6,7 @@ const Pick = ({ monsters }) => {
   //   setOpen(!open)
   // }
 
-  const imgSrc = "https://chisel.weirdgloop.org/static/img/osrs-npc/1_288.png"
+  //const imgSrc = "https://chisel.weirdgloop.org/static/img/osrs-npc/1_288.png"
 
   return (
     <div>
