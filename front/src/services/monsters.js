@@ -1,7 +1,7 @@
 import axios from "axios"
 import { gql, useQuery } from "@apollo/client"
 //test
-const baseUrl = "http://localhost:4000/graphql"
+const baseUrl = "https://immense-ridge-37267.herokuapp.com/graphql"
 const monsters = gql`
   query {
     monsters {
