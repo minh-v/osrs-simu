@@ -26,8 +26,7 @@ require("dotenv").config()
 
 async function startApolloServer(typeDefs, resolvers) {
   const app = express()
-  app.use(cors())
-  app.use(express.static("build"))
+
   const httpServer = http.createServer(app)
   const server = new ApolloServer({
     typeDefs,
@@ -35,7 +34,9 @@ async function startApolloServer(typeDefs, resolvers) {
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
   await server.start()
-  server.applyMiddleware({ app })
+  app.use(cors())
+  app.use(express.static("build"))
+  server.applyMiddleware({ app, cors: true })
   await new Promise((resolve) =>
     httpServer.listen({ port: process.env.PORT || 3001 }, resolve)
   )
