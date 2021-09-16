@@ -72,7 +72,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <div class="container bg-dark">
+      <div class="container-sm bg-dark">
         <form>
           <input
             onChange={handleSearch}
