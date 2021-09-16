@@ -1,5 +1,5 @@
-import { ApolloServer } from "apollo-server-express"
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core"
+const ApolloServer = require("apollo-server-express")
+const ApolloServerPluginDrainHttpServer = require("apollo-server-core")
 const connect = require("./src/connect")
 const cors = require("cors")
 const express = require("express")
