@@ -12,9 +12,9 @@ const Tiles = ({ monsters }) => {
 
   //   console.log(monsterName)
   return (
-    <div class="row row-cols-9 gx-2 gy-2">
+    <div class="row row-cols-12 gx-2 gy-2">
       {monsters.map((monster) => (
-        <div class="col-sm-2" key={monster.id} id="cardColumn">
+        <div class="col-sm-2" key={monster.id}>
           <div class="card">
             <a
               href={`${monster.id}`}
