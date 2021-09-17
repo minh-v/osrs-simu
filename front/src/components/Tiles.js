@@ -14,7 +14,7 @@ const Tiles = ({ monsters }) => {
   return (
     <div class="row row-cols-12 gx-2 gy-2">
       {monsters.map((monster) => (
-        <div class="col-sm-2" key={monster.id}>
+        <div class="col clearfix customRow" key={monster.id}>
           <div class="card">
             <a
               href={`${monster.id}`}

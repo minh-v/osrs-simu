@@ -73,13 +73,15 @@ const App = () => {
     <>
       <Navbar />
       <div class="container-sm bg-dark">
-        <form>
-          <input
-            onChange={handleSearch}
-            placeholder="search monster"
-            className={"searchBar"}
-          />{" "}
-        </form>
+        <div class="row">
+          <form>
+            <input
+              onChange={handleSearch}
+              placeholder="search monster"
+              className={"searchBar"}
+            />{" "}
+          </form>
+        </div>
         {/* {selected && <Monster monster={selected} />} */}
         <Tiles monsters={monstersToShow} />
       </div>
